@@ -1,4 +1,3 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { ChatMessage } from "../types";
 
@@ -28,13 +27,14 @@ Constraints:
 - No meta-commentary about your status or being an AI.
 `;
 
+// 🔴 Hardcoded API key (temporary quick fix)
+const ai = new GoogleGenAI({ apiKey: "AIzaSyBRvpg5vla_veEZ4kp35TL6eE1FaXz_UUU" });
+
 export async function getAperioInsights(history: ChatMessage[], userInput: string): Promise<string> {
-  // Creating a new instance right before the call to ensure latest API Key is used.
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-2.0-flash',
       contents: [
         ...history.map(msg => ({
           role: msg.role === 'assistant' ? 'model' : 'user',
@@ -56,16 +56,16 @@ export async function getAperioInsights(history: ChatMessage[], userInput: strin
       throw new Error("No response from AI engine.");
     }
 
-    // Cleaning any stray markdown symbols
     return text.replace(/[*#_`]/g, '').trim();
+
   } catch (error) {
     console.error("Aperio AI Connection Error:", error);
-    return "Our systems are currently processing a high volume of strategic queries. Please contact our Fitzroy office directly at 03 9230 1500 for immediate priority assistance. [NEXTSTEP] Stop guessing. Book your 30-minute free intro call to engineer your portfolio correctly.";
+
+    return "Our strategic models are currently processing high-volume data to ensure the most precise advisory output. For a comprehensive review of your specific portfolio requirements, a direct consultation with our senior advisors is recommended. [NEXTSTEP] Stop guessing. Book your 30-minute free intro call to engineer your portfolio correctly.";
   }
 }
 
 export async function getLiveGoogleRating(): Promise<{ rating: string, count: string, sources: any[] }> {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const FALLBACK = { rating: '4.6', count: '17', sources: [] };
 
   try {
@@ -87,6 +87,7 @@ export async function getLiveGoogleRating(): Promise<{ rating: string, count: st
       count: countMatch ? countMatch[1] : FALLBACK.count,
       sources: response.candidates?.[0]?.groundingMetadata?.groundingChunks || []
     };
+
   } catch (error) {
     return FALLBACK;
   }

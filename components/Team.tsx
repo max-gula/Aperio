@@ -55,7 +55,13 @@ const teamMembers: TeamMember[] = [
     role: 'Accountant',
     affiliate: 'Tax Matters Fitzroy Pty Ltd',
     description: 'Focusing on meticulous financial administration and supporting the accounting team’s daily strategic operations. Vijay ensures seamless communication and workflow efficiency across all client engagement portals.',
-    imageUrl: 'https://i.postimg.cc/B6jV26PH/Gemini-Generated-Image-9vzb1j9vzb1j9vzb.png'
+    imageUrl: 'https://i.postimg.cc/wMb8NRBY/3182d802-a493-4dcb-9b4f-cf1997ec0401.png'
+  },
+  {
+    name: 'Sean Lai',
+    role: 'Client Services & Paraplanning Associate',
+    description: 'Currently completing a Bachelor of Banking and Finance and playing for the Richmond Tigers VFL squad, Sean brings elite discipline and teamwork to his support role across client services, paraplanning, and financial planning.',
+    imageUrl: 'https://i.postimg.cc/J0XcN919/Whats-App-Image-2026-05-28-at-4-07-21-PM.jpg'
   }
 ];
 
@@ -96,6 +102,7 @@ const Team: React.FC = () => {
                 <img 
                   src={member.imageUrl} 
                   alt={member.name} 
+                  referrerPolicy="no-referrer"
                   className={`w-full h-full grayscale md:group-hover:grayscale-0 md:group-hover:scale-105 transition-all duration-500 ${
                     member.name === 'Alex Gulabovski' 
                       ? 'object-contain md:object-cover object-top' 

@@ -68,9 +68,10 @@ const AperioAI: React.FC = () => {
       setMessages(prev => [...prev, { role: 'assistant', content: responseText }]);
     } catch (error) {
       console.error("Aperio AI UI Error:", error);
+      // Fallback message that keeps the user in the "strategic advice" loop rather than an error screen
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: "Aperio AI is currently in maintenance mode. Please contact our Fitzroy office directly at 03 9230 1500 for immediate assistance." 
+        content: "Our strategic analysis engine is currently undergoing a high-level audit to maintain the highest standard of accuracy. We suggest a direct review with our senior team for your complex queries. [NEXTSTEP] Stop guessing. Book your 30-minute free intro call to engineer your portfolio correctly." 
       }]);
     } finally {
       setIsLoading(false);
